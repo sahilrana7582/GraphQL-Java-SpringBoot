@@ -1,0 +1,30 @@
+type Query {
+    getUserById(id: ID!): UserDTO
+    getAllUsers: [UserDTO!]!
+}
+
+type Mutation {
+    createUser(
+        username: String!
+        email: String!
+        password: String!
+        role: UserRole
+    ): UserDTO!
+}
+
+type UserDTO {
+    id: ID!
+    username: String!
+    email: String!
+    role: UserRole!
+    active: Boolean!
+    createdAt: String
+    lastLogin: String
+}
+
+enum UserRole {
+    USER
+    ADMIN
+    MODERATOR
+    PREMIUM_USER
+}
