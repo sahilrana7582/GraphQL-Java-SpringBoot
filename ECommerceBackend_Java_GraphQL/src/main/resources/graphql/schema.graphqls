@@ -1,0 +1,93 @@
+scalar DateTime
+scalar Currency
+
+enum ProductCategory {
+    ELECTRONICS
+    CLOTHING
+    BOOKS
+    TOYS
+    GAMES
+    HOME
+    SPORTS
+    HEALTH
+    BEAUTY
+}
+
+enum OrderStatus {
+    PENDING
+    PROCESSING
+    SHIPPED
+    DELIVERED
+    CANCELLED
+    REFUNDED
+}
+
+enum UserRole {
+    ADMIN
+    CUSTOMER
+    SELLER
+}
+
+
+interface Searchable {
+    id: ID
+    name: String
+    description: String
+}
+
+interface Auditable {
+    createdAt: DateTime
+    updatedAt: DateTime
+}
+
+input CreateProductInput {
+    name: String!
+    description: String!
+    price: Float!
+    category: ProductCategory!
+    tags: [String!]
+    variants: [ProductVariantInput!]
+
+}
+
+
+
+input ProductVariantInput {
+    color: String
+    size: String
+    stockQuantity: Int!
+}
+
+
+
+# schema.graphqls
+type Query {
+    _dummy: String
+}
+
+
+
+type Product {
+    id: ID!
+    name: String!
+    description: String
+    price: Float!
+    category: ProductCategory!
+    tags: [String!]
+    variants: [ProductVariant!]!
+}
+
+# Complex Nested Type
+type ProductVariant {
+    id: ID!
+    product: Product!
+    color: String
+    size: String
+    stockQuantity: Int!
+}
+
+
+type Mutation {
+    createProduct(input: CreateProductInput!): Product!
+}
+
