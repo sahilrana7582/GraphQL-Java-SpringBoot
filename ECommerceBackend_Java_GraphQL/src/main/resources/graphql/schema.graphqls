@@ -50,12 +50,34 @@ input CreateProductInput {
 
 }
 
-
-
 input ProductVariantInput {
     color: String
     size: String
     stockQuantity: Int!
+}
+
+input UserInput {
+    username: String!
+    password: String!
+    role: UserRole
+    userProfile: UserProfileInput!
+}
+
+input UserProfileInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String!
+    age: Int!
+    address: AddressInput!
+}
+
+input AddressInput {
+    street: String!
+    city: String!
+    state: String!
+    country: String!
+    zipCode: String!
 }
 
 
@@ -86,8 +108,38 @@ type ProductVariant {
     stockQuantity: Int!
 }
 
+type User {
+    id: ID!
+    username: String!
+    password: String!
+    role: UserRole!
+    userProfile: UserProfile!
+}
+
+type UserProfile {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String!
+    age: Int!
+    address: AddressType!
+}
+
+type AddressType {
+    id: ID!
+    street: String!
+    city: String!
+    state: String!
+    country: String!
+    zipCode: String!
+}
+
+
+
 
 type Mutation {
     createProduct(input: CreateProductInput!): Product!
+    createUser(input: UserInput!): User
 }
 
